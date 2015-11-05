@@ -12,6 +12,7 @@
       'ui.router',
       'firebase',
       'iot-templates',
-      'blocks.exception', 'blocks.logger', 'blocks.router'
+      'blocks.exception', 'blocks.logger', 'blocks.router',
+        'highcharts-ng'
     ]);
 })();

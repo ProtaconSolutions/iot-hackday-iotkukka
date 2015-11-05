@@ -2,27 +2,51 @@
   'use strict';
 
   /**
-   * Specify controller for iot.demo module.
+   * Specify controller for iot.humidity module.
    *
    * @namespace Controllers
    */
   angular
-    .module('iot.demo')
-    .controller('DemoController', DemoController)
+    .module('iot.humidity')
+    .controller('humidityController', humidityController)
   ;
 
   /**
-   * @desc      Controller implementation for /demo route.
-   * @namespace Demo
+   * @desc      Controller implementation for /humidity route.
+   * @namespace humidity
    * @memberOf  Controllers
    * @ngInject
    *
    * @constructor
    */
-  function DemoController(_messages) {
+  function humidityController(_messages, _latest, $scope) {
     var vm = this;
 
     vm.messages = _messages;
+      vm.latest = _latest;
+    vm.data = [];
+      var firstValue = true;
+
+      var ploo = function(valueNew) {
+          angular.forEach(valueNew, function(value){
+              console.log(value.humidity);
+
+              vm.data.push(
+                  parseInt(value.humidity)
+              );
+          });
+      };
+
+      _messages.$loaded(function (data) {
+          ploo(data);
+                $scope.$watch('vm.latest', function (valueNew, valueOld) {
+                    if (firstValue != true) {
+                    ploo(valueNew);
+                    vm.data.shift();
+                    }
+                    firstValue = false;
+                }, true);
+      });
 
     //This is not a highcharts object. It just looks a little like one!
     vm.chartConfig = {
@@ -31,7 +55,7 @@
         //This is the Main Highcharts chart config. Any Highchart options are valid here.
         //will be overriden by values specified below.
         chart: {
-          type: 'bar'
+          type: 'line'
         },
         tooltip: {
           style: {
@@ -44,7 +68,7 @@
 
       //Series object (optional) - a list of series using normal highcharts series options.
       series: [{
-        data: [10, 15, 12, 8, 7]
+        data: vm.data //[10, 15, 12, 8, 7]
       }],
       //Title configuration (optional)
       title: {
@@ -56,8 +80,8 @@
       //Configuration for the xAxis (optional). Currently only one x axis can be dynamically controlled.
       //properties currentMin and currentMax provied 2-way binding to the chart's maximum and minimum
       xAxis: {
-        currentMin: 0,
-        currentMax: 20,
+        //currentMin: 0,
+        //currentMax: 20,
         title: {text: 'values'}
       },
       //Whether to use HighStocks instead of HighCharts (optional). Defaults to false.
@@ -67,6 +91,7 @@
         width: 400,
         height: 300
       },
+      turboThreshold: true,
       //function (optional)
       func: function (chart) {
         //setup some logic for the chart

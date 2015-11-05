@@ -1,8 +1,4 @@
 <div class="demo">
-
-    jeee
-
-    {{vm.messages|json}}
     <div class="messages"
          data-demo-screen
          data-demo-scroll="vm.messages"
@@ -14,6 +10,9 @@
                 </div>
             </md-list-item>
         </md-list>
+
+        <highchart id="chart1" config="vm.chartConfig"></highchart>
+
     </div>
 </div>
 
