@@ -1,5 +1,5 @@
-# iot-hackday-gui-boilerplate
+# IoT Kukka
 
-## What is this?
-
-Simple GUI boilerplate for IoT hackday. Purpose of this is to connect actual IoT devices via Firebase to this GUI.
+iot-hackday-iotkukka-kukka // Arduino program that measures flower pot humidity
+iot-hackday-iotkukka-ruukku // Php program that pushes data to Firebase database
+iot-hackday-iotkukka // Angular app that shows flower pot data from Firebase database
