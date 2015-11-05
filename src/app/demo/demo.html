@@ -1,0 +1,19 @@
+<div class="demo">
+
+    jeee
+
+    {{vm.messages|json}}
+    <div class="messages"
+         data-demo-screen
+         data-demo-scroll="vm.messages"
+    >
+        <md-list>
+            <md-list-item class="md-2-line" data-ng-repeat="message in vm.messages">
+                <div class="md-list-item-text">
+                    <p>{{message}}</p>
+                </div>
+            </md-list-item>
+        </md-list>
+    </div>
+</div>
+

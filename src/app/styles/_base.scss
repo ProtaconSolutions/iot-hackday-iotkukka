@@ -1,0 +1,10 @@
+@import "mixins";
+
+html {
+  font-family: "RobotoDraft", "Roboto", sans-serif;
+  overflow-x: hidden;
+}
+
+body {
+  @include noSelect();
+}
