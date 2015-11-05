@@ -66,6 +66,6 @@
    * @private
    */
   function _messages($firebaseArray, dataservice) {
-    return $firebaseArray(dataservice.getReference('iotkukka'));
+    return $firebaseArray(dataservice.getReference('humidity'));
   }
 })();
