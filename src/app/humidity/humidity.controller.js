@@ -29,10 +29,12 @@
 
       var ploo = function(valueNew) {
           angular.forEach(valueNew, function(value){
-              console.log(value.humidity);
+              //console.log(moment.unix(value.timestamp).format("MM/DD/YYYY"));
 
               vm.data.push(
-                  parseInt(value.humidity)
+                  [
+                      moment.unix(value.timestamp).format("DD.MM.YYYY"),
+                      parseInt(value.humidity)]
               );
           });
       };
@@ -55,7 +57,7 @@
         //This is the Main Highcharts chart config. Any Highchart options are valid here.
         //will be overriden by values specified below.
         chart: {
-          type: 'line'
+          type: 'spline'
         },
         tooltip: {
           style: {
@@ -72,7 +74,7 @@
       }],
       //Title configuration (optional)
       title: {
-        text: 'Hello'
+        text: ''
       },
       //Boolean to control showng loading status on chart (optional)
       //Could be a string if you want to show specific loading text.
@@ -82,15 +84,23 @@
       xAxis: {
         //currentMin: 0,
         //currentMax: 20,
-        title: {text: 'values'}
+        title: {text: 'Aika'},
+          labels: {
+              enabled: false
+          }
       },
+        yAxis: {
+            //currentMin: 0,
+            //currentMax: 700,
+            title: {text: 'Kosteus'}
+        },
       //Whether to use HighStocks instead of HighCharts (optional). Defaults to false.
       useHighStocks: false,
       //size (optional) if left out the chart will default to size of the div or something sensible.
-      size: {
+      /*size: {
         width: 400,
         height: 300
-      },
+      },*/
       turboThreshold: true,
       //function (optional)
       func: function (chart) {
